@@ -13,11 +13,14 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import java.time.Clock;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static booking.restaurant.domain.exception.ReservationException.ERROR_MSG_CANCEL_BOOKING;
 import static booking.restaurant.domain.exception.ReservationException.ERR_MSG_DATE_OR_TIME_NOT_CORRECT;
 
 @Service
@@ -63,4 +66,15 @@ public class BookingService {
         Reservation reservation = new Reservation(customer, timeSlot.getDate(), timeSlot.getTime(), note,persons, timeSlot.getTableNumber());
         reservationRepository.save(reservation);
     }
+
+    public void cancelReservation(String reservationCode) throws ReservationException {
+
+        Reservation reservation = reservationRepository.findByCode(reservationCode);
+
+        if(LocalDateTime.now(clock).until(LocalDateTime.of(reservation.getDate(), reservation.getTime()), ChronoUnit.HOURS) < 3) {
+            throw new ReservationException(ERROR_MSG_CANCEL_BOOKING);
+        }
+        reservationRepository.delete(reservation);
+    }
+
 }
