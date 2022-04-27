@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Restaurant Booking</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+    .container {
+        max-width: 800px;
+    }
+
+    .table4 {
+        width:  20%;
+        height:  10%;
+    }
+
+    #graphic {
+        position: relative;
+    }
+
+    .table {
+        position: absolute;
+    }
+
+    .table2 {
+        width:  10%;
+        height:  10%;
+    }
+
+    .table6 {
+        width:  30%;
+        height:  10%;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="nav navbar-nav">
+        <a class="nav-item nav-link active" href="/">MyRestaurant <span class="sr-only">(current)</span></a>
+    </div>
+</nav>
+<div class="container text-center" style="margin-top: 40px;">
+    <h4>Restaurant Booking Software</h4>
+    <br><br>
+
+    <div class="alert alert-danger" role="alert" th:if="${error} != null" th:text="${error}" >
+        ERROR
+    </div>
+
+    <form method="post" class="form" th:object="${form}" th:action="@{/formular}">
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" name="date" id="date" aria-describedby="dateHelper" placeholder="1:30am">
+            <small id="dateHelper" class="form-text text-muted">Select the date of your booking</small>
+        </div>
+        <div class="form-group">
+            <label for="persons">Persons</label>
+            <input type="number" class="form-control" name="persons" min="1" max="8" id="persons" aria-describedby="personsHelper" required value="4">
+            <small id="personsHelper" class="form-text text-muted">Select the number of persons</small>
+        </div>
+        <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" step="900" min="9:00" max="22:00" class="form-control" name="time" id="time" aria-describedby="timeHelper" required value="4">
+            <small id="timeHelper" class="form-text text-muted">Select the time</small>
+        </div>
+        <button type="submit" name="formular" class="btn btn-primary">Submit Data</button>
+    </form>
+</div>
+
+<div class="container text-center" style="margin-top: 40px;">
+        <h6>Do you want to cancel your Reservation?</h6>
+        <br><br>
+        <form method="post" class="form" th:action="@{/cancel/reservation}">
+            <div class="form-group">
+                <label for="code">Reservation Code</label>
+                <input type="text" class="form-control" name="code" id="code" aria-describedby="codeHelper" required>
+                <small id="codeHelper" class="form-text text-muted">Enter the code of your Reservation</small>
+            </div>
+            <button type="submit" name="cancelReservation" class="btn btn-warning">Submit</button>
+        </form>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

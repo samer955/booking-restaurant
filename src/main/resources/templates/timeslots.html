@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Restaurant Booking</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+    .container {
+        max-width: 500px;
+    }
+
+    #graphic {
+        position: relative;
+    }
+
+
+    /* Add some margins for each label */
+    .btn-group label {
+        margin: 10px 20px 10px 0;
+    }
+
+
+    /* Style the submit button */
+    .btn-group button {
+        padding: 15px 25px;
+        background-color: dodgerblue;
+        border: 5px solid #ddd;
+        color: white;
+    }
+
+    .btn-group button:hover {
+        background-color: royalblue;
+    }
+
+    /* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
+    @media (max-width: 800px) {
+        .btn-group input {
+            margin: 10px 0;
+        }
+
+        .btn-group {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+
+</style>
+<body>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="nav navbar-nav">
+        <a class="nav-item nav-link active" href="/">MyRestaurant <span class="sr-only">(current)</span></a>
+    </div>
+</nav>
+<div class="container text-center" style="margin-top: 40px;">
+    <h4>Restaurant Booking Software</h4>
+    <br><br>
+
+    <div class="alert alert-danger" role="alert" th:if="${error} != null" th:text="${error}" >
+        ERROR
+    </div>
+
+    <br><br>
+    <h6><span th:if="${timeslots.size() != 0}"> Next free timeslots for the Day: </span><span th:if="${timeslots.size() != 0}"  th:text="${timeslots.get(0).getDate()}"></span></h6>
+
+    <div id="graphic" class="container-fluid" style="height: 100px; background: #f1f1f1; margin: auto; text-align: left;">
+            <tbody th:remove="all-but-first">
+
+            <tr th:each="timeslot : ${timeslots}" th:object="${timeslot}">
+                <td>
+                    <form class="btn-group" name="chooseTimeSlot" method="get" th:action="@{/book/{table}(table=${timeslot.getTableNumber()})}">
+                        <button type="submit" name="slotTime" class="btn btn-primary"><span th:text="${timeslot.getTime()}"></span></button>
+                    </form>
+                </td>
+            </tr>
+        </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
