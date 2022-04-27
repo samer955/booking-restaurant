@@ -29,12 +29,14 @@ public class BookingService {
     private final ReservationRepository reservationRepository;
     private final TableRepository tableRepository;
     private final TimeSlotsService timeSlotsService;
+    private final EmailService emailService;
     private final Clock clock;
 
-    public BookingService(ReservationRepository reservationRepository, TableRepository tableRepository, TimeSlotsService timeSlotsService, Clock clock) {
+    public BookingService(ReservationRepository reservationRepository, TableRepository tableRepository, TimeSlotsService timeSlotsService, EmailService emailService, Clock clock) {
         this.reservationRepository = reservationRepository;
         this.tableRepository = tableRepository;
         this.timeSlotsService = timeSlotsService;
+        this.emailService = emailService;
         this.clock = clock;
     }
 
@@ -65,6 +67,13 @@ public class BookingService {
     public void closeBooking(Customer customer, String note, int persons, TimeSlot timeSlot) {
         Reservation reservation = new Reservation(customer, timeSlot.getDate(), timeSlot.getTime(), note,persons, timeSlot.getTableNumber());
         reservationRepository.save(reservation);
+        String confirmBooking = emailService.createConfirmEmail(customer, reservation);
+
+        try {
+            emailService.send(customer.email(), confirmBooking);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void cancelReservation(String reservationCode) throws ReservationException {
@@ -75,6 +84,13 @@ public class BookingService {
             throw new ReservationException(ERROR_MSG_CANCEL_BOOKING);
         }
         reservationRepository.delete(reservation);
+
+        String cancelBooking = emailService.createCancelEmail(reservation.getCustomer(),reservation);
+        try {
+            emailService.send(reservation.getCustomer().email(), cancelBooking);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
 }

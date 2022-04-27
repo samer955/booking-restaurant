@@ -52,7 +52,7 @@ public class EmailServiceImpl implements EmailService {
                 "<p> Name: " + customer.name() + "</p>" +
                 "<p> Email: " + customer.email() + "</p>" +
                 "<p> Telefon " + customer.telefonNumber() + "</p>" +
-                "<p> Keep in Mind that you can cancel for free your Reservation until 23:59 of the previous Day " +
+                "<p> Keep in Mind that you can cancel for free your Reservation until 3 Hour before your Reservation begin " +
                 "using the following code: " + res.getCode();
 
         return email;

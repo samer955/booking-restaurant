@@ -37,6 +37,9 @@ public class BookingServiceTest {
     @MockBean
     TableRepository tableRepository;
 
+    @MockBean
+    EmailService emailService;
+
     TimeSlotsService timeSlotsService;
 
     final Clock clock = Clock.fixed(Instant.parse("2022-05-19T10:00:00.00Z"),ZoneId.systemDefault());
@@ -46,7 +49,7 @@ public class BookingServiceTest {
     @BeforeEach
     void setup() {
         timeSlotsService = new TimeSlotsService(new ReservationTime(START_RESERVATION,END_RESERVATION));
-        bookingService = new BookingService(reservationRepository, tableRepository, timeSlotsService, clock);
+        bookingService = new BookingService(reservationRepository, tableRepository, timeSlotsService, emailService, clock);
     }
 
     @Test
