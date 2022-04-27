@@ -39,7 +39,7 @@ public class TimeSlotsService {
 
         LocalTime last_tmp = reservationHours.get(reservationHours.size() - 1).plus(2, ChronoUnit.HOURS);
 
-        if (last_tmp.isBefore(reservationTime.end())) {
+        if (last_tmp.isBefore(reservationTime.end()) || last_tmp.equals(reservationTime.end())) {
             getTimeSlotsTillEnd(date, tableNumber, freeTimeSlots, last_tmp);
         }
 
@@ -68,7 +68,7 @@ public class TimeSlotsService {
     //create TimeSlots from last reservation till the end of the day
     private void getTimeSlotsTillEnd(LocalDate date, int tableNumber, List<TimeSlot> freeTimeSlots, LocalTime last_tmp) {
 
-        while (last_tmp.isBefore(reservationTime.end()) || last_tmp.equals(reservationTime.end())) {
+        while (last_tmp.isAfter(reservationTime.end()) || last_tmp.equals(reservationTime.end())) {
             TimeSlot timeslot = new TimeSlot(date, last_tmp, tableNumber);
             freeTimeSlots.add(timeslot);
             last_tmp = last_tmp.plus(15, ChronoUnit.MINUTES);
