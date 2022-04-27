@@ -5,12 +5,32 @@ import booking.restaurant.domain.service.TimeSlotsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.time.Clock;
 import java.time.LocalTime;
+import java.util.Properties;
 
 @Configuration
 public class SpringConfig {
+
+    @Bean
+    public JavaMailSender getJavaMailSender()
+    {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("localhost");
+        mailSender.setPort(1025);
+        mailSender.setUsername("sa");
+        mailSender.setPassword("sa");
+
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        return mailSender;
+    }
 
     @Bean
     public ReservationTime createReservationTime(@Value("#{T(java.time.LocalTime).parse('${RESERVATION_START_TIME}')}") LocalTime startTime,
