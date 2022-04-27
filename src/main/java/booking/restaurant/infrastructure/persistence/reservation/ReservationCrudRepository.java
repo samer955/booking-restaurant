@@ -1,6 +1,5 @@
-package booking.restaurant.infrastructure.database.reservation;
+package booking.restaurant.infrastructure.persistence.reservation;
 
-import booking.restaurant.domain.model.Reservation;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

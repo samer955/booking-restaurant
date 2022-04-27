@@ -20,8 +20,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static booking.restaurant.domain.exception.ReservationException.ERROR_MSG_CANCEL_BOOKING;
-import static booking.restaurant.domain.exception.ReservationException.ERR_MSG_DATE_OR_TIME_NOT_CORRECT;
+import static booking.restaurant.domain.exception.ReservationException.*;
 
 @Service
 public class BookingService {
@@ -54,10 +53,9 @@ public class BookingService {
         List<TimeSlot> freeTimeSlots = tablesWithCapacity.stream()
                 .map(table -> timeSlotsService.getFreeTimeSlots(reservationRepository.findAllByDateAndTableNumber(date, table.getNumber()), date, table.getNumber()))
                 .flatMap(List::stream)
+                .filter(t -> t.getTime().getHour() >= time.getHour())
                 .sorted(Comparator.comparing(TimeSlot::getTime))
                 .distinct()
-                .filter(t -> t.getTime().getHour() >= time.getHour())
-                .filter(t -> t.getTime().getMinute() >= time.getMinute())
                 .limit(4)
                 .collect(Collectors.toList());
 
@@ -79,6 +77,10 @@ public class BookingService {
     public void cancelReservation(String reservationCode) throws ReservationException {
 
         Reservation reservation = reservationRepository.findByCode(reservationCode);
+
+        if(reservation == null) {
+            throw new ReservationException(ERROR_MSG_WRONG_CODE);
+        }
 
         if(LocalDateTime.now(clock).until(LocalDateTime.of(reservation.getDate(), reservation.getTime()), ChronoUnit.HOURS) < 3) {
             throw new ReservationException(ERROR_MSG_CANCEL_BOOKING);
