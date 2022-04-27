@@ -1,4 +1,4 @@
-package booking.restaurant.infrastructure.database.table;
+package booking.restaurant.infrastructure.persistence.table;
 
 import booking.restaurant.domain.model.Table;
 import org.springframework.data.annotation.Id;

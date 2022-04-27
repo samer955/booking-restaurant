@@ -1,4 +1,4 @@
-package booking.restaurant.infrastructure.database.table;
+package booking.restaurant.infrastructure.persistence.table;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

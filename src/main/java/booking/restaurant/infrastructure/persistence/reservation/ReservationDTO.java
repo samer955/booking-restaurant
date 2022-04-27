@@ -1,4 +1,4 @@
-package booking.restaurant.infrastructure.database.reservation;
+package booking.restaurant.infrastructure.persistence.reservation;
 
 import booking.restaurant.domain.model.Customer;
 import booking.restaurant.domain.model.Reservation;

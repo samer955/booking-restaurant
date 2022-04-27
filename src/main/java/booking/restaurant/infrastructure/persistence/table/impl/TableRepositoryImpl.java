@@ -1,8 +1,8 @@
-package booking.restaurant.infrastructure.database.table.impl;
+package booking.restaurant.infrastructure.persistence.table.impl;
 
 import booking.restaurant.domain.model.Table;
-import booking.restaurant.infrastructure.database.table.TableCrudRepository;
-import booking.restaurant.infrastructure.database.table.TableDTO;
+import booking.restaurant.infrastructure.persistence.table.TableCrudRepository;
+import booking.restaurant.infrastructure.persistence.table.TableDTO;
 import booking.restaurant.service.repository.TableRepository;
 import org.springframework.stereotype.Component;
 
