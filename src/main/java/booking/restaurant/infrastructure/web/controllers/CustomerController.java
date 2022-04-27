@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -73,6 +74,19 @@ public class CustomerController {
         TimeSlot timeSlot = new TimeSlot(date,time,tableNumber);
         bookingService.closeBooking(form.toCustomer(),null,persons,timeSlot);
         model.addAttribute("success", " Thank you for your booking! A confirmation Email was sended to your Email account.");
+        return "message";
+    }
+
+    @PostMapping("/cancel/reservation")
+    public String cancelReservation(@RequestParam("code") String code, Model model, RedirectAttributes attr) {
+
+        try {
+            bookingService.cancelReservation(code);
+        } catch (ReservationException e) {
+            attr.addFlashAttribute("error", e.getMessage());
+            return "redirect:/";
+        }
+        model.addAttribute("success", "Your booking was successfully canceled, a confirmation was sendend to your Email account.");
         return "message";
     }
 }
