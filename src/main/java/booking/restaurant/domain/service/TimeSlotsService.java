@@ -4,6 +4,7 @@ import booking.restaurant.domain.ReservationTime;
 import booking.restaurant.domain.model.Reservation;
 import booking.restaurant.domain.model.TimeSlot;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -37,10 +38,13 @@ public class TimeSlotsService {
             getTimeSlotsBetweenReservation(date, tableNumber, freeTimeSlots, reservationHours);
         }
 
-        LocalTime last_tmp = reservationHours.get(reservationHours.size() - 1).plus(2, ChronoUnit.HOURS);
+        LocalTime last_tmp = reservationHours.get(reservationHours.size() - 1);
+        LocalDateTime dateTime_last = LocalDateTime.of(date,last_tmp).plus(2,ChronoUnit.HOURS);
+        LocalDateTime endDateTime = LocalDateTime.of(date,reservationTime.end());
 
-        if (last_tmp.isBefore(reservationTime.end()) || last_tmp.equals(reservationTime.end())) {
-            getTimeSlotsTillEnd(date, tableNumber, freeTimeSlots, last_tmp);
+        //last_temp-1 mint
+        if (dateTime_last.isBefore(endDateTime) || dateTime_last.equals(endDateTime)) {
+            getTimeSlotsTillEnd(date, tableNumber, freeTimeSlots, last_tmp.plus(2,ChronoUnit.HOURS));
         }
 
         return freeTimeSlots;
@@ -67,7 +71,6 @@ public class TimeSlotsService {
 
     //create TimeSlots from last reservation till the end of the day
     public void getTimeSlotsTillEnd(LocalDate date, int tableNumber, List<TimeSlot> freeTimeSlots, LocalTime last_tmp) {
-
         while (last_tmp.isBefore(reservationTime.end()) ||  last_tmp.equals(reservationTime.end())) {
             TimeSlot timeslot = new TimeSlot(date, last_tmp, tableNumber);
             freeTimeSlots.add(timeslot);

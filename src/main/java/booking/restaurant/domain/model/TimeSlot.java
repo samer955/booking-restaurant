@@ -40,4 +40,13 @@ public class TimeSlot {
     public int hashCode() {
         return Objects.hash(date, time);
     }
+
+    @Override
+    public String toString() {
+        return "TimeSlot{" +
+                "date=" + date +
+                ", time=" + time +
+                ", tableNumber=" + tableNumber +
+                '}';
+    }
 }
