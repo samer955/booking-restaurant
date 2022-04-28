@@ -60,4 +60,36 @@ public class ReservationDTO {
     public int hashCode() {
         return Objects.hash(id, code, customer, date, time, note, persons, tableNumber);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public int getPersons() {
+        return persons;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
 }

@@ -24,6 +24,11 @@ public class ReservationException extends Throwable {
             "Dear Customer, keep in mind that the maximal number of persons for a reservation is 8." +
                     "If you book a Table remember that your reservation is valid for 2h.";
 
+    public static final String SUCCESS_CANCEL_ADMIN =
+            "Reservation successfully deleted";
+
+    public static final String NO_RESERVATION =
+            "There is no Reservation for this day";
 
     public ReservationException(String errorMessage) {
         super(errorMessage);

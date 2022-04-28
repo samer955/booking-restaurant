@@ -10,7 +10,11 @@ import java.util.List;
 public interface ReservationCrudRepository extends CrudRepository<ReservationDTO, Long> {
 
     List<ReservationDTO> findAll();
+
     List<ReservationDTO> findAllByDateAndTableNumber(LocalDate date, int tableNumber);
+
     ReservationDTO findByCode(String code);
+
+    List<ReservationDTO> findAllByDate(LocalDate date);
 
 }

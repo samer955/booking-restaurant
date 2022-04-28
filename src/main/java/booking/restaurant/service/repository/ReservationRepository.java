@@ -17,4 +17,7 @@ public interface ReservationRepository {
 
     void delete(Reservation reservation);
 
+    List<Reservation> findAllByDate(LocalDate date);
+
+    Reservation findById(Long id);
 }

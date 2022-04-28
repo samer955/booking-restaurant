@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,5 +47,20 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     @Override
     public void delete(Reservation reservation) {
         reservationCrudRepository.delete(new ReservationDTO(reservation));
+    }
+
+
+    @Override
+    public List<Reservation> findAllByDate(LocalDate date) {
+        return reservationCrudRepository.findAllByDate(date).stream()
+                .map(ReservationDTO::toReservation)
+                .sorted(Comparator.comparing(Reservation::getTime))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Reservation findById(Long id) {
+        ReservationDTO reservation = reservationCrudRepository.findById(id).orElse(null);
+        return reservation.toReservation();
     }
 }
