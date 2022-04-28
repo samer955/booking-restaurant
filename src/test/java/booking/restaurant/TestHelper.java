@@ -40,6 +40,8 @@ public class TestHelper {
     public static final Reservation RES_OF_2022_05_20_AT_17_00 = new Reservation(null,DATE_OF_2022_05_20, TIME_OF_17_00,null,0,4);
     public static final Reservation RES_OF_2022_05_20_AT_19_00 = new Reservation(null,DATE_OF_2022_05_20, TIME_OF_19_00,null,0,4);
     public static final Reservation RES_OF_2022_05_20_AT_21_00 = new Reservation(null,DATE_OF_2022_05_20, TIME_OF_21_00,null,0,4);
+    public static final Reservation RES_OF_2022_05_20_AT_22_00 = new Reservation(null,DATE_OF_2022_05_20, TIME_OF_22_00,null,0,4);
+
 
 
     public static final TimeSlot TIME_SLOT_OF_2022_05_20_AT_09_00 = new TimeSlot(DATE_OF_2022_05_20, TIME_OF_09_00,4);

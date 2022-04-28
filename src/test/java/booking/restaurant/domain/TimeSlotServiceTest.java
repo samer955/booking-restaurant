@@ -6,6 +6,9 @@ import booking.restaurant.domain.model.TimeSlot;
 import booking.restaurant.domain.service.TimeSlotsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,6 +120,25 @@ public class TimeSlotServiceTest {
 
         assertThat(timeSlots).hasSize(1);
         assertThat(timeSlots).contains(TIME_SLOT_OF_2022_05_20_AT_13_00);
+    }
+
+    @Test
+    @DisplayName("Reservations at 22, so we have dont have any timeslot free after 22")
+    void test_7() {
+
+        int tableNumber = 4;
+
+        List<Reservation> reservationsOnDay = List.of(
+                RES_OF_2022_05_20_AT_22_00
+        );
+
+        List<TimeSlot> timeSlots = timeSlotsService.getFreeTimeSlots(reservationsOnDay,DATE_OF_2022_05_20,tableNumber);
+
+        timeSlotsService.getTimeSlotsTillEnd(DATE_OF_2022_05_20,4, new ArrayList<>(), LocalTime.of(00,00));
+
+       // assertThat(timeSlots).doesNotContain(TIME_SLOT_OF_2022_05_20_AT_22_00);
+
+        System.out.println(timeSlots.size());
     }
 
 }
