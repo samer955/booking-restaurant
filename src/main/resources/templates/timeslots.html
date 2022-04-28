@@ -67,12 +67,12 @@
     <br><br>
     <h6><span th:if="${timeslots.size() != 0}"> Next free timeslots for the Day: </span><span th:if="${timeslots.size() != 0}"  th:text="${timeslots.get(0).getDate()}"></span></h6>
 
-    <div id="graphic" class="container-fluid" style="height: 100px; background: #f1f1f1; margin: auto; text-align: left;">
+    <div th:if="${timeslots.size() != 0}" id="graphic" class="container-fluid" style="height: 100px; background: #f1f1f1; margin: auto; text-align: left;">
             <tbody th:remove="all-but-first">
 
             <tr th:each="timeslot : ${timeslots}" th:object="${timeslot}">
                 <td>
-                    <form class="btn-group" name="chooseTimeSlot" method="get" th:action="@{/book/{table}(table=${timeslot.getTableNumber()})}">
+                    <form class="btn-group" name="chooseTimeSlot" method="get" th:action="@{/myrestaurant/book/{table}(table=${timeslot.getTableNumber()})}">
                         <button type="submit" name="slotTime" th:value="${timeslot.getTime()}" class="btn btn-primary"><span th:text="${timeslot.getTime()}"></span></button>
                     </form>
                 </td>
