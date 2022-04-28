@@ -8,7 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,10 +101,12 @@ public class TimeSlotServiceTest {
         assertThat(timeSlots).hasSize(13);
         assertThat(timeSlots).contains(TIME_SLOT_OF_2022_05_20_AT_19_00);
         assertThat(timeSlots).contains(TIME_SLOT_OF_2022_05_20_AT_22_00);
+
+        System.out.println(timeSlots);
     }
 
     @Test
-    @DisplayName("Reservations start at 9:00 till 11 and from 15 till end, so we have one timeslot free between")
+    @DisplayName("Reservations start at 9:00 till 11 and from 15 till end, so we have one timeslot free between 11 and 15")
     void test_6() {
 
         int tableNumber = 4;
@@ -122,23 +126,8 @@ public class TimeSlotServiceTest {
         assertThat(timeSlots).contains(TIME_SLOT_OF_2022_05_20_AT_13_00);
     }
 
-    @Test
-    @DisplayName("Reservations at 22, so we have dont have any timeslot free after 22")
-    void test_7() {
 
-        int tableNumber = 4;
 
-        List<Reservation> reservationsOnDay = List.of(
-                RES_OF_2022_05_20_AT_22_00
-        );
 
-        List<TimeSlot> timeSlots = timeSlotsService.getFreeTimeSlots(reservationsOnDay,DATE_OF_2022_05_20,tableNumber);
-
-        timeSlotsService.getTimeSlotsTillEnd(DATE_OF_2022_05_20,4, new ArrayList<>(), LocalTime.of(00,00));
-
-       // assertThat(timeSlots).doesNotContain(TIME_SLOT_OF_2022_05_20_AT_22_00);
-
-        System.out.println(timeSlots.size());
-    }
 
 }
