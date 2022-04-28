@@ -12,7 +12,18 @@ public class ReservationException extends Throwable {
             "The code you entered is incorrect";
 
     public static final String ERR_NO_TIME_SLOT_AVAILABLE =
-            "There are no free time Slots for this Hour";
+            "There are no free time Slots for this Hour or the number of persons doesn't fit";
+
+    public static final String SUCCESS_CANCEL_BOOKING =
+            "Your booking was successfully canceled, a confirmation was sent to your Email account.";
+
+    public static final String SUCCESS_BOOKING =
+            "Thank you for your booking! A confirmation Email was sent to your Email account.";
+
+    public static final String TO_REMEMBER =
+            "Dear Customer, keep in mind that the maximal number of persons for a reservation is 8." +
+                    "If you book a Table remember that your reservation is valid for 2h.";
+
 
     public ReservationException(String errorMessage) {
         super(errorMessage);
