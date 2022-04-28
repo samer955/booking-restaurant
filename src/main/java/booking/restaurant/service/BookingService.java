@@ -8,6 +8,7 @@ import booking.restaurant.domain.model.TimeSlot;
 import booking.restaurant.domain.service.TimeSlotsService;
 import booking.restaurant.service.repository.ReservationRepository;
 import booking.restaurant.service.repository.TableRepository;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -95,4 +96,22 @@ public class BookingService {
         }
     }
 
+    public List<Reservation> getAllReservationsByDate(LocalDate date) {
+        return reservationRepository.findAllByDate(date);
+    }
+
+    @Secured("ROLE_ADMIN")
+    public void cancelReservationAdmin(Long id) {
+        Reservation reservation = reservationRepository.findById(id);
+        if(reservation != null) reservationRepository.delete(reservation);
+        //
+    }
+
+    public Reservation save(Reservation reservation) {
+        return reservationRepository.save(reservation);
+    }
+
+    public Reservation findById(Long id) {
+        return reservationRepository.findById(id);
+    }
 }
