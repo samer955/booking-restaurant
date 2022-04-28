@@ -47,14 +47,22 @@
     <h4>Restaurant Booking Software</h4>
     <br><br>
 
+    <div class="alert alert-warning" role="alert" th:if="${remember} != null" th:text="${remember}" >
+        REMEMBER
+    </div>
+
     <div class="alert alert-danger" role="alert" th:if="${error} != null" th:text="${error}" >
         ERROR
+    </div>
+
+    <div class="alert alert-success" role="alert" th:if="${success} != null" th:text="${success}" >
+        SUCCESS
     </div>
 
     <form method="post" class="form" th:object="${form}" th:action="@{/formular}">
         <div class="form-group">
             <label for="date">Date</label>
-            <input type="date" class="form-control" name="date" id="date" aria-describedby="dateHelper" placeholder="1:30am">
+            <input type="date" class="form-control" name="date" id="date" aria-describedby="dateHelper">
             <small id="dateHelper" class="form-text text-muted">Select the date of your booking</small>
         </div>
         <div class="form-group">
@@ -64,7 +72,7 @@
         </div>
         <div class="form-group">
             <label for="time">Time</label>
-            <input type="time" step="900" min="9:00" max="22:00" class="form-control" name="time" id="time" aria-describedby="timeHelper" required value="4">
+            <input type="time" step="900" min="9:00" max="22:00" class="form-control" name="time" id="time" aria-describedby="timeHelper" required value="10:00">
             <small id="timeHelper" class="form-text text-muted">Select the time</small>
         </div>
         <button type="submit" name="formular" class="btn btn-primary">Submit Data</button>

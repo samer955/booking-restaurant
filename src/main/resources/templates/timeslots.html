@@ -73,7 +73,7 @@
             <tr th:each="timeslot : ${timeslots}" th:object="${timeslot}">
                 <td>
                     <form class="btn-group" name="chooseTimeSlot" method="get" th:action="@{/book/{table}(table=${timeslot.getTableNumber()})}">
-                        <button type="submit" name="slotTime" class="btn btn-primary"><span th:text="${timeslot.getTime()}"></span></button>
+                        <button type="submit" name="slotTime" th:value="${timeslot.getTime()}" class="btn btn-primary"><span th:text="${timeslot.getTime()}"></span></button>
                     </form>
                 </td>
             </tr>

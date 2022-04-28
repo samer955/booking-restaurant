@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Restaurant Booking</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+  .container {
+    max-width: 800px;
+  }
+
+  .table4 {
+    width:  20%;
+    height:  10%;
+  }
+
+  #graphic {
+    position: relative;
+  }
+
+  .table {
+    position: absolute;
+  }
+
+  .table2 {
+    width:  10%;
+    height:  10%;
+  }
+
+  .table6 {
+    width:  30%;
+    height:  10%;
+  }
+</style>
+<body>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="nav navbar-nav">
+    <a class="nav-item nav-link active" href="#">Best Restaurant Ever <span class="sr-only">(current)</span></a>
+    <a class="nav-item nav-link" href="#">Booking</a>
+  </div>
+</nav>
+<div class="container text-center" style="margin-top: 40px;">
+  <h4>Restaurant Booking Software</h4>
+  <br><br>
+
+  <form method="post" class="form" th:action="@{/close/booking/{table}(table=${table})}">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelper" placeholder="Mark" required>
+      <small id="nameHelper" class="form-text text-muted">Enter your Name</small>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelper" required>
+      <small id="emailHelper" class="form-text text-muted">Enter your Email</small>
+    </div>
+    <div class="form-group">
+      <label for="telefonNumber">Telefon</label>
+      <input type="text"  class="form-control" name="telefonNumber" id="telefonNumber" aria-describedby="telefonHelper" required>
+      <small id="telefonHelper" class="form-text text-muted">Enter your Telefon Number</small>
+    </div>
+    <button type="submit" name="registartion" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
