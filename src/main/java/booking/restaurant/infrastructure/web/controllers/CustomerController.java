@@ -4,7 +4,7 @@ import booking.restaurant.domain.exception.ReservationException;
 import booking.restaurant.domain.model.TimeSlot;
 import booking.restaurant.infrastructure.web.CustomerInfoForm;
 import booking.restaurant.infrastructure.web.FormularForm;
-import booking.restaurant.service.BookingService;
+import booking.restaurant.application.BookingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +38,7 @@ public class CustomerController {
 
     @PostMapping("/myrestaurant")
     public String postFormular(Model model, FormularForm form, HttpSession session, RedirectAttributes attr){
-
+        //save the attributes to use after at the end of the reservaton
         session.setAttribute("date", form.date());
         session.setAttribute("persons", form.persons());
 
@@ -65,6 +65,7 @@ public class CustomerController {
 
     @PostMapping("/myrestaurant/close/booking/{table}")
     public String postReservation(@PathVariable("table") int tableNumber, CustomerInfoForm form, HttpSession session, RedirectAttributes attr) {
+        //get session attributes
         LocalDate date = (LocalDate) session.getAttribute("date");
         int persons = (int) session.getAttribute("persons");
         LocalTime time = (LocalTime) session.getAttribute("time");
@@ -81,7 +82,6 @@ public class CustomerController {
 
     @PostMapping("/myrestaurant/cancel/reservation")
     public String cancelReservation(@RequestParam("code") String code, RedirectAttributes attr) {
-
         try {
             bookingService.cancelReservation(code);
         } catch (ReservationException e) {

@@ -13,29 +13,6 @@
   .container {
     max-width: 800px;
   }
-
-  .table4 {
-    width:  20%;
-    height:  10%;
-  }
-
-  #graphic {
-    position: relative;
-  }
-
-  .table {
-    position: absolute;
-  }
-
-  .table2 {
-    width:  10%;
-    height:  10%;
-  }
-
-  .table6 {
-    width:  30%;
-    height:  10%;
-  }
 </style>
 <body>
 <nav class="navbar navbar-expand navbar-dark bg-dark">
@@ -50,18 +27,18 @@
   <form method="post" class="form" th:action="@{/myrestaurant/close/booking/{table}(table=${table})}">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelper" placeholder="Mark" required>
-      <small id="nameHelper" class="form-text text-muted">Enter your Name</small>
+      <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelper" required>
+      <small id="nameHelper" class="form-text text-muted">Enter your name</small>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelper" required>
-      <small id="emailHelper" class="form-text text-muted">Enter your Email</small>
+      <small id="emailHelper" class="form-text text-muted">Enter your email</small>
     </div>
     <div class="form-group">
       <label for="telefonNumber">Telefon</label>
-      <input type="text"  class="form-control" name="telefonNumber" id="telefonNumber" aria-describedby="telefonHelper" required>
-      <small id="telefonHelper" class="form-text text-muted">Enter your Telefon Number</small>
+      <input type="number"  class="form-control" name="telefonNumber" id="telefonNumber" aria-describedby="telefonHelper" required>
+      <small id="telefonHelper" class="form-text text-muted">Enter your telefon number</small>
     </div>
     <div class="form-group">
       <label for="note">Note</label>

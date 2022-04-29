@@ -1,4 +1,4 @@
-package booking.restaurant.service;
+package booking.restaurant.application;
 
 import booking.restaurant.domain.ReservationTime;
 import booking.restaurant.domain.exception.ReservationException;

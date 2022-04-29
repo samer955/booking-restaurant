@@ -1,7 +1,7 @@
 package booking.restaurant.infrastructure.web.controllers;
 
+import booking.restaurant.application.BookingService;
 import booking.restaurant.domain.model.Reservation;
-import booking.restaurant.service.BookingService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -35,6 +35,7 @@ public class AdminController {
         if(reservations.size() == 0) {
             model.addAttribute("nores", NO_RESERVATION);
         }
+        model.addAttribute("user",user.getName());
         model.addAttribute("date", date);
         model.addAttribute("reservations", reservations);
         return "admin";

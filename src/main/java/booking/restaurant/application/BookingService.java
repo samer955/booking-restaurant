@@ -1,4 +1,4 @@
-package booking.restaurant.service;
+package booking.restaurant.application;
 
 import booking.restaurant.domain.exception.ReservationException;
 import booking.restaurant.domain.model.Customer;
@@ -76,13 +76,10 @@ public class BookingService {
     }
 
     public void cancelReservation(String reservationCode) throws ReservationException {
-
         Reservation reservation = reservationRepository.findByCode(reservationCode);
-
         if(reservation == null) {
             throw new ReservationException(ERROR_MSG_WRONG_CODE);
         }
-
         if(LocalDateTime.now(clock).until(LocalDateTime.of(reservation.getDate(), reservation.getTime()), ChronoUnit.HOURS) < 3) {
             throw new ReservationException(ERROR_MSG_CANCEL_BOOKING);
         }
@@ -103,8 +100,9 @@ public class BookingService {
     @Secured("ROLE_ADMIN")
     public void cancelReservationAdmin(Long id) {
         Reservation reservation = reservationRepository.findById(id);
-        if(reservation != null) reservationRepository.delete(reservation);
-        //
+        if(reservation != null) {
+            reservationRepository.delete(reservation);
+        }
     }
 
     public Reservation save(Reservation reservation) {

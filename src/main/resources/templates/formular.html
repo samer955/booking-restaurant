@@ -13,29 +13,6 @@
     .container {
         max-width: 800px;
     }
-
-    .table4 {
-        width:  20%;
-        height:  10%;
-    }
-
-    #graphic {
-        position: relative;
-    }
-
-    .table {
-        position: absolute;
-    }
-
-    .table2 {
-        width:  10%;
-        height:  10%;
-    }
-
-    .table6 {
-        width:  30%;
-        height:  10%;
-    }
 </style>
 <body>
 <nav class="navbar navbar-expand navbar-dark bg-dark">
@@ -72,7 +49,7 @@
         </div>
         <div class="form-group">
             <label for="time">Time</label>
-            <input type="time" step="900" min="9:00" max="22:00" class="form-control" name="time" id="time" aria-describedby="timeHelper" required value="10:00">
+            <input type="time" step="3600" min="9:00" max="22:00" class="form-control" name="time" id="time" aria-describedby="timeHelper" required value="10:00">
             <small id="timeHelper" class="form-text text-muted">Select the time</small>
         </div>
         <button type="submit" name="formular" class="btn btn-primary">Submit Data</button>
@@ -80,17 +57,30 @@
 </div>
 
 <div class="container text-center" style="margin-top: 40px;">
-        <h6>Do you want to cancel your Reservation?</h6>
-        <br><br>
-        <form method="post" class="form" th:action="@{/cancel/reservation}">
-            <div class="form-group">
-                <label for="code">Reservation Code</label>
-                <input type="text" class="form-control" name="code" id="code" aria-describedby="codeHelper" required>
-                <small id="codeHelper" class="form-text text-muted">Enter the code of your Reservation</small>
+        <br>
+    <a href="#" class="link-dark" data-toggle="modal" data-target="#exampleModal">Do you want to cancel your Reservation?</a>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="justify-content: center">Enter the code of your reservation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" th:action="@{/myrestaurant/cancel/reservation}">
+                    <div class="form-group">
+                        <label for="code">Code</label>
+                        <input id="code" class="form-control" type="text" name="code" placeholder="d6e0fb72-66bb-46ed-8d52-65a8885efb36" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning">Submit</button>
+                    </div>
+                </form>
             </div>
-            <button type="submit" name="cancelReservation" class="btn btn-warning">Submit</button>
-        </form>
-</div>
+        </div>
+        </div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

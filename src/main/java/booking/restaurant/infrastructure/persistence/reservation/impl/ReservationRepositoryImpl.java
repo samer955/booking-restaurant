@@ -36,7 +36,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     @Override
     public Reservation findByCode(String code) {
         ReservationDTO reservationDTO = reservationCrudRepository.findByCode(code);
-        return reservationDTO.toReservation();
+        if(reservationDTO != null) return reservationDTO.toReservation();
+        return null;
     }
 
     @Override

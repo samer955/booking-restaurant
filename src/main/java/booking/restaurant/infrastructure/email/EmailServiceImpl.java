@@ -2,7 +2,7 @@ package booking.restaurant.infrastructure.email;
 
 import booking.restaurant.domain.model.Customer;
 import booking.restaurant.domain.model.Reservation;
-import booking.restaurant.service.EmailService;
+import booking.restaurant.application.EmailService;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
