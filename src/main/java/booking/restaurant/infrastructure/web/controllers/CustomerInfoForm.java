@@ -1,4 +1,4 @@
-package booking.restaurant.infrastructure.web;
+package booking.restaurant.infrastructure.web.controllers;
 
 import booking.restaurant.domain.model.Customer;
 
