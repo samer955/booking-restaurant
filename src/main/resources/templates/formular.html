@@ -63,14 +63,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="justify-content: center">Enter the code of your reservation</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="justify-content: center">Enter the code of your reservation to cancel it</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form method="post" th:action="@{/myrestaurant/cancel/reservation}">
                     <div class="form-group">
-                        <label for="code">Code</label>
+                        <label for="code">You find the code in the confirmation email</label>
                         <input id="code" class="form-control" type="text" name="code" placeholder="d6e0fb72-66bb-46ed-8d52-65a8885efb36" required>
                     </div>
                     <div class="modal-footer">

@@ -15,6 +15,7 @@ import java.util.Properties;
 @Configuration
 public class SpringConfig {
 
+    //set the port and protocol for the mailsender
     @Bean
     public JavaMailSender getJavaMailSender()
     {
@@ -27,16 +28,18 @@ public class SpringConfig {
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.starttls.enable", "false");
 
         return mailSender;
     }
 
+    //injection from the property
     @Bean
     public ReservationTime createReservationTime(@Value("#{T(java.time.LocalTime).parse('${RESERVATION_START_TIME}')}") LocalTime startTime,
                                                  @Value("#{T(java.time.LocalTime).parse('${RESERVATION_END_TIME}')}") LocalTime endTime) {
         return new ReservationTime(startTime,endTime);
     }
+
 
     @Bean
     public TimeSlotsService createService(ReservationTime reservationTime) {
