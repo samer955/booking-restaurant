@@ -23,12 +23,11 @@ CREATE TABLE IF NOT EXISTS `customer`(
     telefon_number varchar(20)
     );
 
+INSERT INTO `table_dto` (id, number, min_capacity, max_capacity)
+VALUES (1, 1, 6, 8);
 
 INSERT INTO `table_dto` (id, number, min_capacity, max_capacity)
-VALUES (1, 1, 5, 6);
-
-INSERT INTO `table_dto` (id, number, min_capacity, max_capacity)
-VALUES (2, 2, 5, 5);
+VALUES (2, 2, 5, 6);
 
 INSERT INTO `table_dto` (id, number, min_capacity, max_capacity)
 VALUES (3, 3, 3, 4);
