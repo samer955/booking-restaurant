@@ -52,8 +52,8 @@ public class EmailServiceImpl implements EmailService {
                 "<p> Name: " + customer.name() + "</p>" +
                 "<p> Email: " + customer.email() + "</p>" +
                 "<p> Telefon " + customer.telefonNumber() + "</p>" +
-                "<p> Keep in Mind that you can cancel for free your Reservation until 3 Hour before your Reservation begin " +
-                "using the following code: " + res.getCode();
+                "<p> <strong> Keep in mind that you can cancel for free your reservation until 3 hours before your reservation begin " +
+                "using the following code: " + res.getCode() + "</strong></p>";
 
         return email;
     }
@@ -64,8 +64,8 @@ public class EmailServiceImpl implements EmailService {
         String email =
                 "<p> Dear Customer, </p>" +
                 "<p> We have received the cancellation of your booking" +
-                "for the day: " + res.getDate() + "at:" + res.getTime() + "</p>" +
-                "<p> Your Personal Data: </p>" +
+                "for the day: " + res.getDate() + " at: " + res.getTime() + "</p>" +
+                "<p> Your personal data: </p>" +
                 "<p> Name: " + customer.name() + "</p>" +
                 "<p> Email: " + customer.email() + "</p>" +
                 "<p> Telefon " + customer.telefonNumber() + "</p>";
