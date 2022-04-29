@@ -2,7 +2,6 @@ FROM gradle:7.3-jdk17 AS BUILD
 WORKDIR /booking-restaurant
 COPY . /booking-restaurant
 RUN gradle bootJar
-RUN
 
 FROM eclipse-temurin:17-alpine
 WORKDIR /restaurant
