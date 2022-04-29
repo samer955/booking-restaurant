@@ -1,4 +1,4 @@
-package booking.restaurant.infrastructure.securty;
+package booking.restaurant.infrastructure.web.securty;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,9 +25,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
       http.authorizeRequests()
+              .antMatchers("/myrestaurant/**")
+              .permitAll()
               .antMatchers("/**/admin/**")
               .authenticated()
               .and().formLogin();
+      http.csrf().disable();
   }
 
 

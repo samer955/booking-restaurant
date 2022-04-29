@@ -2,8 +2,6 @@ package booking.restaurant.infrastructure.web.controllers;
 
 import booking.restaurant.domain.exception.ReservationException;
 import booking.restaurant.domain.model.TimeSlot;
-import booking.restaurant.infrastructure.web.CustomerInfoForm;
-import booking.restaurant.infrastructure.web.FormularForm;
 import booking.restaurant.application.BookingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +13,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static booking.restaurant.domain.exception.ReservationException.*;
+import static booking.restaurant.infrastructure.web.controllers.Routes.*;
 
 @Controller
 public class CustomerController {
@@ -25,18 +24,18 @@ public class CustomerController {
         this.bookingService = bookingService;
     }
 
-    @GetMapping("/")
+    @GetMapping(INDEX)
     public String redirect() {
-        return "redirect:/myrestaurant";
+        return "redirect:" + HOME;
     }
 
-    @GetMapping("/myrestaurant")
+    @GetMapping(HOME)
     public String getIndexView(Model model) {
         model.addAttribute("remember", TO_REMEMBER);
         return "formular";
     }
 
-    @PostMapping("/myrestaurant")
+    @PostMapping(HOME)
     public String postFormular(Model model, FormularForm form, HttpSession session, RedirectAttributes attr){
         //save the attributes to use after at the end of the reservaton
         session.setAttribute("date", form.date());
@@ -47,7 +46,7 @@ public class CustomerController {
             freeSlots = bookingService.findFreeTable(form.persons(), form.date(), form.time());
         } catch (ReservationException e) {
             attr.addFlashAttribute("error", e.getMessage());
-            return "redirect:/myrestaurant";
+            return "redirect:" + HOME;
         }
         if(freeSlots.size() == 0) {
             model.addAttribute("error", ERR_NO_TIME_SLOT_AVAILABLE);
@@ -56,14 +55,14 @@ public class CustomerController {
         return "timeslots";
     }
 
-    @GetMapping("/myrestaurant/book/{table}")
+    @GetMapping(BOOK_TABLE + "/{table}")
     public String getReservationView(@PathVariable("table") int tableNumber, @ModelAttribute("slotTime") LocalTime time, Model model, HttpSession session) {
         session.setAttribute("time",time);
         model.addAttribute("table", tableNumber);
         return "reservation";
     }
 
-    @PostMapping("/myrestaurant/close/booking/{table}")
+    @PostMapping(CLOSE_BOOKING + "/{table}")
     public String postReservation(@PathVariable("table") int tableNumber, CustomerInfoForm form, HttpSession session, RedirectAttributes attr) {
         //get session attributes
         LocalDate date = (LocalDate) session.getAttribute("date");
@@ -77,19 +76,19 @@ public class CustomerController {
         session.removeAttribute("persons");
 
         attr.addFlashAttribute("success", SUCCESS_BOOKING);
-        return "redirect:/myrestaurant";
+        return "redirect:" + HOME;
     }
 
-    @PostMapping("/myrestaurant/cancel/reservation")
+    @PostMapping(CANCEL_RESERVATION)
     public String cancelReservation(@RequestParam("code") String code, RedirectAttributes attr) {
         try {
             bookingService.cancelReservation(code);
         } catch (ReservationException e) {
             attr.addFlashAttribute("error", e.getMessage());
-            return "redirect:/myrestaurant";
+            return "redirect:" + HOME;
         }
-        attr.addAttribute("success", SUCCESS_CANCEL_BOOKING);
-        return "redirect:/myrestaurant";
+        attr.addFlashAttribute("success", SUCCESS_CANCEL_BOOKING);
+        return "redirect:" + HOME;
     }
 
 }

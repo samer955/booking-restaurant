@@ -1,4 +1,4 @@
-package booking.restaurant.infrastructure.securty;
+package booking.restaurant.infrastructure.web.securty;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

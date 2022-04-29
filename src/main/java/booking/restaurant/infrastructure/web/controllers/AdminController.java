@@ -15,6 +15,8 @@ import java.util.List;
 
 import static booking.restaurant.domain.exception.ReservationException.NO_RESERVATION;
 import static booking.restaurant.domain.exception.ReservationException.SUCCESS_CANCEL_ADMIN;
+import static booking.restaurant.infrastructure.web.controllers.Routes.ADMIN;
+import static booking.restaurant.infrastructure.web.controllers.Routes.ADMIN_CANCEL_RESERVATION;
 
 @Controller
 public class AdminController {
@@ -26,7 +28,7 @@ public class AdminController {
     }
 
     @Secured("ROLE_ADMIN")
-    @GetMapping("/myrestaurant/admin")
+    @GetMapping(ADMIN)
     public String adminView(Model model, Principal user, @RequestParam(
             name = "date", defaultValue = "#{T(java.time.LocalDate).now()}",
             required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
@@ -43,11 +45,11 @@ public class AdminController {
 
 
     @Secured("ROLE_ADMIN")
-    @PostMapping("/myrestaurant/admin/delete/{id}")
+    @PostMapping(ADMIN_CANCEL_RESERVATION + "/{id}")
     public String deleteReservation(@PathVariable("id") Long id, RedirectAttributes attr) {
         Reservation reservation = bookingService.findById(id);
         bookingService.cancelReservationAdmin(id);
         attr.addFlashAttribute("success", SUCCESS_CANCEL_ADMIN);
-        return "redirect:/myrestaurant/admin" + "?date=" + reservation.getDate();
+        return "redirect:" + ADMIN + "?date=" + reservation.getDate();
     }
 }
