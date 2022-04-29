@@ -15,9 +15,9 @@ RESERVATION_START_TIME = HH:MM
 RESERVATION_END_TIME = HH:MM
 ```
 
-#### Webapp start:
+### Webapp start:
 
-#####method 1:
+##### method 1:
 
 Start the app with gradle in the main directory:
 ```console
@@ -40,26 +40,27 @@ You can install it locally like me or just give the following command using Dock
  .It starts a WebApp on Port http://localhost:1080 where you can read the emails and listening on port 1025.
 
 
-#####method 2:
+##### method 2:
 Building and running an image with Docker using the following commands:
 `docker build -t myrestaurant .` (in the main directory)
 and after running the app with docker `run -dp 8080:8080 myrestaurant`
 
 The email 
 
-#####method 3:
+##### method 3:
 Start the programm with your IDE (IntelliJ/Eclipse) and start [maildev](https://github.com/maildev/maildev) separately.
 
 
-##To know:
+## To know:
 
-###Reservation:
+### Reservation:
 
 The reservation are given in form of timeslots with intervals of 15 min: 9:00, 9:15, 9:30.. 22:00.
 Between every booked reservation must be an interval of 2h. It means that if a table has only on reservation at 9:00, the next free reservation can be booked at 11:00 (if there are no other table free).
 A reservation can be canceled from customers using the code received in the confirmation email. This is possible until 3 hours before the reservation of the table start.
 The Admin can instead cancels them anytime.
-###Table:
+
+### Table:
 The table are static and already saved in the database. There are 5 different table with different capacity (min and max).
 
 Table number 1: capacity from 6 to 8. <br /> 
@@ -68,7 +69,7 @@ Table number 3: capacity from 3 to 4. <br />
 Table number 4: capacity from 1 to 2. <br />
 Table number 5: capacity from 1 to 2. <br />
 
-###Admin:
+### Admin:
 You can access to the admin view in http://localhost8080/myrestaurant/admin with username: `admin` and password `admin`.
 
 
