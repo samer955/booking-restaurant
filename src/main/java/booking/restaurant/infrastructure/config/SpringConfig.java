@@ -20,7 +20,7 @@ public class SpringConfig {
     public JavaMailSender getJavaMailSender()
     {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("localhost");
+        mailSender.setHost("maildev");
         mailSender.setPort(1025);
         mailSender.setUsername("sa");
         mailSender.setPassword("sa");
