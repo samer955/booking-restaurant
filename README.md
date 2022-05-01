@@ -18,38 +18,8 @@ RESERVATION_END_TIME = HH:MM
 
 ### Webapp start:
 
-##### method 1:
-
-Start the app with gradle in the main directory:
-```console
-User@Desktop:~$ ./gradlew bootRun
-.
-.
-.
-2022-04-29 17:28:58.232  INFO 86616 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-
-<==========---> 80% EXECUTING [26s]
-> :bootRun
-```
-
-The MyRestaurant Application will be avaiable on http://localhost:8080/ and it uses a in-memory h2 database. If you want to check the stored data, go to http://localhost:8080/h2-console 
-
-The Application uses the Interface Java Mail Sender to send confirmation email to the customers. To have access to the email I use one Fake-SMTP-Server to test the email.
-One possibility is to use [maildev](https://github.com/maildev/maildev).
-You can install it locally like me or just give the following command using Docker to pull and run the image :
-`docker run -p 1080:1080 -p 1025:1025 maildev/maildev`
- .It starts a WebApp on Port http://localhost:1080 where you can read the emails and listening on port 1025.
-
-
-##### method 2:
-Building and running an image with Docker using the following commands:
-`docker build -t myrestaurant .` (in the main directory)
-and after running the app with docker `run -dp 8080:8080 myrestaurant`
-
-The email 
-
-##### method 3:
-Start the programm with your IDE (IntelliJ/Eclipse) and start [maildev](https://github.com/maildev/maildev) separately.
+After you clone the repository run `docker-compose up` in the main directory. It takes a few minutes to build and run the two images.
+After that, the MyRestaurant-Application will be avaiable on http://localhost:8080/ . In order to read the emails sent from the MyRestaurant-Application open http://localhost:1080 to have access to the UserInterface of [maildev](https://github.com/maildev/maildev). The last one is a Fake-Smtp-Server that receive every email sended on port 25.
 
 
 ## To know:
