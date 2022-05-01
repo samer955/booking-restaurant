@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  maildev:
+    image: maildev/maildev
+    restart: always
+    environment:
+      - MAILDEV_WEB_PORT=1080
+    ports:
+      - "1080:1080"
+  myrestaurant:
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
